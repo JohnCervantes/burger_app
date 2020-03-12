@@ -12,7 +12,8 @@ export default class Checkout extends Component {
         meat: "",
         bacon: "",
         cheese: ""
-      }
+      },
+      totalPrice: 0
     };
   }
 
@@ -20,7 +21,11 @@ export default class Checkout extends Component {
     const query = new URLSearchParams(this.props.location.search);
     const ingredients = {};
     for (let param of query.entries()) {
-      ingredients[param[0]] = +param[1];
+      if (param[0] === "price") {
+        this.setState({ totalPrice: +param[1] });
+      } else {
+        ingredients[param[0]] = +param[1];
+      }
     }
     console.log(ingredients);
     this.setState({ ingredients: ingredients });
@@ -37,11 +42,18 @@ export default class Checkout extends Component {
   render() {
     return (
       <div>
-        <CheckoutSummary
-          checkoutCancel={this.checkoutCancelHandler}
-          checkoutContinue={this.checkoutContinueHandler}
-          ingredients={this.state.ingredients}
-        ></CheckoutSummary>
+        <Route
+          path="/checkout"
+          exact
+          render={() => (
+            <CheckoutSummary
+              checkoutCancel={this.checkoutCancelHandler}
+              checkoutContinue={this.checkoutContinueHandler}
+              ingredients={this.state.ingredients}
+              price={this.state.totalPrice}
+            />
+          )}
+        ></Route>
         <Route
           path={this.props.match.path + "/contact-data"}
           exact

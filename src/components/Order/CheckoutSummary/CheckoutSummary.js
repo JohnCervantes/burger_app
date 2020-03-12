@@ -8,10 +8,9 @@ const CheckoutSummary = props => {
       <h1>Enjoy your order</h1>
       <div style={{ width: "100%", height: "300px", margin: "auto" }}>
         <Burger ingredients={props.ingredients}></Burger>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
+        <p>
+          <strong>Total Price: {props.price.toFixed(2)}</strong>
+        </p>
         <button onClick={props.checkoutCancel}>Cancel</button>
         <button onClick={props.checkoutContinue}>Continue</button>
       </div>

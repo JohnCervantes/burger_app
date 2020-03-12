@@ -14,6 +14,10 @@ export default class ContactData extends Component {
     };
   }
 
+  orderHandler = event => {
+    event.preventDefault();
+  };
+
   render() {
     return (
       <div className={classes.ContactData}>
@@ -44,7 +48,9 @@ export default class ContactData extends Component {
             placeholder="enter postal here"
           ></input>
           <br></br>
-          <button type="submit">ORDER</button>
+          <button onClick={this.orderHandler} type="submit">
+            ORDER
+          </button>
         </form>
       </div>
     );
