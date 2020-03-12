@@ -8,7 +8,7 @@ const navigationItems = props => {
       <NavigationItem link="/" exact active>
         Burger Builder
       </NavigationItem>
-      <NavigationItem link="/orders">Orders</NavigationItem>
+      <NavigationItem link="/checkout">Checkout</NavigationItem>
     </ul>
   );
 };

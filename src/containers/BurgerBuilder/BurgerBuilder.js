@@ -43,6 +43,22 @@ class BurgerBuilder extends Component {
     this.setState({ purchaseable: sum > 0 });
   }
 
+  checkoutHandler = () => {
+    const queryParams = [];
+    for (let key in this.state.ingredients) {
+      queryParams.push(
+        encodeURIComponent(key) +
+          "=" +
+          encodeURIComponent(this.state.ingredients[key])
+      );
+    }
+    const queryProperUrl = queryParams.join("&");
+    this.props.history.push({
+      pathname: "/checkout",
+      search: "?" + queryProperUrl
+    });
+  };
+
   addIngredientHandler = type => {
     const oldCount = this.state.ingredients[type];
     const updatedCount = oldCount + 1;
@@ -85,7 +101,11 @@ class BurgerBuilder extends Component {
     return (
       <Aux>
         <Modal show={this.state.purchasing} modalClosed={this.purchaseHandler}>
-          <OrderSummary ingredients={this.state.ingredients} purchaseCancelled={this.purchaseHandler}></OrderSummary>
+          <OrderSummary
+            clicked={this.checkoutHandler}
+            ingredients={this.state.ingredients}
+            purchaseCancelled={this.purchaseHandler}
+          ></OrderSummary>
         </Modal>
 
         <Burger ingredients={this.state.ingredients}></Burger>

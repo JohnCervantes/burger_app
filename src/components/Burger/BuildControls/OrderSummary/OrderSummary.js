@@ -1,5 +1,6 @@
 import React from "react";
 import Aux from "../../../../hoc/Aux";
+import { Link } from "react-router-dom";
 
 const OrderSummary = props => {
   const ingredientSummary = Object.keys(props.ingredients).map(key => {
@@ -16,12 +17,10 @@ const OrderSummary = props => {
       <p>A delicious burger with the following ingredients:</p>
       <ul>{ingredientSummary}</ul>
       <p>Continue to checkout?</p>
-      <button btnType="Danger" onClick={props.purchaseCancelled}>
+      <button  onClick={props.purchaseCancelled}>
         CANCEL
       </button>
-      <button btnType="Success">
-        CONTINUE
-      </button>
+      <button onClick={props.clicked} btnType="Success">CONTINUE</button>
     </Aux>
   );
 };
