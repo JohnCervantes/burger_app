@@ -57,7 +57,12 @@ export default class Checkout extends Component {
         <Route
           path={this.props.match.path + "/contact-data"}
           exact
-          component={ContactData}
+          render={() => (
+            <ContactData
+              ingredients={this.state.ingredients}
+              price={this.state.totalPrice}
+            />
+          )}
         ></Route>
       </div>
     );

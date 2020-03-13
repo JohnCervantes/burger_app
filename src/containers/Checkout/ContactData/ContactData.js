@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import classes from "./ContactData.module.css";
+import instance from "../../../axios-orders";
+import { withRouter } from "react-router-dom";
 
-export default class ContactData extends Component {
+class ContactData extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -16,6 +18,29 @@ export default class ContactData extends Component {
 
   orderHandler = event => {
     event.preventDefault();
+    const order = {
+      ingredients: this.props.ingredients,
+      price: this.props.price.toFixed(2),
+      customer: {
+        name: "john",
+        email: "test@test.com",
+        deliveryMethod: "slow af",
+        address: {
+          street: "street",
+          zip: "zip",
+          country: "germany"
+        }
+      }
+    };
+    instance
+      .post("/orders.json", order)
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+    this.props.history.replace("/");
   };
 
   render() {
@@ -56,3 +81,5 @@ export default class ContactData extends Component {
     );
   }
 }
+
+export default withRouter(ContactData);

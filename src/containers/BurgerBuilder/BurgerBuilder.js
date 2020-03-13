@@ -4,6 +4,7 @@ import Burger from "../../components/Burger/Burger";
 import BuildControls from "../../components/Burger/BuildControls/BuildControls";
 import Modal from "../../components/Layout/UI/Modal/Modal";
 import OrderSummary from "../../components/Burger/BuildControls/OrderSummary/OrderSummary";
+import instance from "../../axios-orders";
 
 const INGREDIENTS_PRICES = {
   salad: 0.5,
