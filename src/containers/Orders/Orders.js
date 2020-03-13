@@ -11,18 +11,33 @@ export default class Orders extends Component {
   }
 
   componentDidMount() {
-    // instance
-    //   .get("/orders.json")
-    //   .then(res => {
-          
-    //   })
-    //   .catch();
+    const fetchData = [];
+    instance
+      .get("/orders.json")
+      .then(res => {
+        for (let key in res.data) {
+          fetchData.push({ ...res.data[key], key: key });
+        }
+        this.setState({ orders: fetchData });
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
 
   render() {
     return (
       <div>
-        <Order></Order>
+        {this.state.orders.map(order => {
+          return (
+            <Order
+              key={order.id}
+              price={order.price}
+              customer={order.customer}
+              ingredients={order.ingredients}
+            />
+          );
+        })}
       </div>
     );
   }
